@@ -1,0 +1,72 @@
+@model List<FormData>
+@using Newtonsoft.Json;
+
+@{
+    var jsonData = JsonConvert.SerializeObject(Model);
+}
+
+<div id="myData"></div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+
+            var data = @Html.Raw(jsonData);
+            var firstRowJson = JSON.parse(data[0].FormValues);
+
+            //--main div
+            var mainDiv = document.getElementById('myData');
+            //--main div
+
+            //--Table
+            var table = document.createElement("TABLE");
+            table.setAttribute("id", "dataTable");
+            table.setAttribute("class","table table-bordered table-hover")
+            //--Table
+
+            //--thead
+            var head = document.createElement('thead');
+            var trHead = document.createElement('tr');
+            for(var e in firstRowJson)
+            {
+                var td = document.createElement('td');
+                td.innerText = e;
+                trHead.appendChild(td);
+            }
+            //--thead
+            //--append head to table
+            head.appendChild(trHead);
+            table.appendChild(head);
+            //--append head to table
+
+            //--tbody
+            var tbody = document.createElement('tbody');
+            //--tbody
+
+            //--create rows
+            $.each(data, function(i, item) {
+                
+                var bodyTr = document.createElement('tr');
+
+                var row = JSON.parse(data[i].FormValues);
+                var arr = new Array();
+                for(var e in row)
+                {
+                    var bodyTd = document.createElement('td');
+                    bodyTd.innerHTML = row[e];
+                    bodyTr.appendChild(bodyTd);
+                }
+                tbody.appendChild(bodyTr);
+            });
+            //--create rows
+
+            //--append body
+            table.appendChild(tbody);
+            //--append body
+
+            mainDiv.appendChild(table);
+
+        });
+        
+    </script>
+}
