@@ -1,0 +1,64 @@
+@model Form
+
+<input id="formId" name="formId" type="hidden" value="@Model.Id"/>
+<form id="@Model.Name" name="@Model.Name" action="/ManageForms/Form" method="POST">
+    @foreach(var item in Model.Fields)
+    {
+        
+        <input type="@item.Type" name="@item.Title" id="@item.Title"/>
+        <br/>
+    }
+    <input type="button" onclick="submitForm()" value="ثبت فرم"/>
+</form>
+
+@section Scripts
+{
+    <script>
+        function submitForm()
+        {
+            
+            var form = document.getElementById('@Model.Name') || document.querySelector('form[name="@Model.Name"]');
+            var json = Array.from(new FormData(form)).map(function(e,i) {
+                if(typeof(e[1]) != "object")
+                {
+                    this[e[0]]=e[1];
+                    return this;
+                }
+            }.bind({}))[0];
+            
+            var fdata = new FormData();
+            
+            var frmId = $('#formId').val();
+            fdata.append("FormId",frmId);
+
+            var names = "";
+            $('input[type="file"]').each(function(a, b) {
+                var fileInput = $('input[type="file"]')[a];
+                if (fileInput.files.length > 0) {
+                    var file = fileInput.files[0];
+                    names += fileInput.name + "|" + file.name + "=";
+                    fdata.append("Files", file);
+                }
+            });
+            fdata.append("FilesName",names);
+           
+            
+            var str = JSON.stringify(json);
+
+            fdata.append("FormValues",str);
+            
+            $.ajax({
+            url: '/ManageForms/Form/' + frmId,
+            type : 'POST',
+            processData : false,
+            contentType : false,
+            
+            data: fdata
+            
+            })
+            .done(function(result) {
+                console.log(result);
+            })
+        }
+    </script>    
+}

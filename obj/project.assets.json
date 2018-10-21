@@ -11506,11 +11506,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\Work\\Sadin.ir\\Articles\\003-FormGenerator\\Project\\Project.csproj",
+      "projectUniqueName": "h:\\Work\\Sadin.ir\\Articles\\003-FormGenerator\\FormGenerator\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "H:\\Work\\Sadin.ir\\Articles\\003-FormGenerator\\Project\\Project.csproj",
+      "projectPath": "h:\\Work\\Sadin.ir\\Articles\\003-FormGenerator\\FormGenerator\\Project.csproj",
       "packagesPath": "C:\\Users\\Kamran\\.nuget\\packages\\",
-      "outputPath": "H:\\Work\\Sadin.ir\\Articles\\003-FormGenerator\\Project\\obj\\",
+      "outputPath": "h:\\Work\\Sadin.ir\\Articles\\003-FormGenerator\\FormGenerator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
